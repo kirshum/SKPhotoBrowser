@@ -79,12 +79,12 @@ import Foundation
     @objc optional func changeLikedState(_ browser: SKPhotoBrowser, index: Int, sender: SKLikeButton)
     
     /**
-     Tells the delegate the user want to edit a photo
+     Tells the delegate the user want to add item to offline
      
      - Parameter browser: reference to the calling SKPhotoBrowser
-     - Parameter index: the index of the editing photo
+     - Parameter index: the index of the item
      */
-    @objc optional func editPhoto(_ browser: SKPhotoBrowser, index: Int)
+    @objc optional func addItemToOffline(_ browser: SKPhotoBrowser, index: Int, sender: SKOfflineButton)
     
     /**
      Tells the delegate the user want to share media

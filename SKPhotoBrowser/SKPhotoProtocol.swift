@@ -11,7 +11,6 @@ import Foundation
     case image, video
 }
 
-
 @objc public protocol SKPhotoProtocol: NSObjectProtocol {
     
     var index: Int { get set }
@@ -19,6 +18,8 @@ import Foundation
     var caption: String? { get }
     var contentMode: UIView.ContentMode { get set }
     var type: MediaType { get }
+    
+    var isOffline: Bool { get set }
     
     var isLiked: Bool { get set }
     

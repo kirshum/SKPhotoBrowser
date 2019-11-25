@@ -15,7 +15,7 @@ open class SKPhotoBrowser: UIViewController {
     // open function
     open var currentPageIndex: Int = 0 {
         didSet {
-            self.setupLiked()
+            self.setupToolBarButtoms()
         }
     }
     open var initPageIndex: Int = 0
@@ -152,7 +152,7 @@ open class SKPhotoBrowser: UIViewController {
         }
         pagingScrollView.updateFrame(view.bounds, currentPageIndex: currentPageIndex)
 
-        self.setupLiked()
+        self.setupToolBarButtoms()
         isPerformingLayout = false
     }
     
@@ -282,6 +282,10 @@ public extension SKPhotoBrowser {
     
     func updateDeleteButton(_ image: UIImage, size: CGSize? = nil) {
         actionView.updateDeleteButton(image: image, size: size)
+    }
+    
+    func updateOfflineButton() {
+        self.setupOfflineButton()
     }
 }
 
@@ -427,10 +431,22 @@ internal extension SKPhotoBrowser {
         return pageFrame
     }
     
-    func setupLiked() {
+    func setupToolBarButtoms() {
+        self.setupLikedButton()
+        self.setupOfflineButton()
+    }
+    
+    private func setupLikedButton() {
         if let toolbar = self.toolbar {
             let photo = self.photos[currentPageIndex]
             toolbar.isLiked = photo.isLiked
+        }
+    }
+    
+    private func setupOfflineButton() {
+        if let toolbar = self.toolbar {
+            let photo = self.photos[currentPageIndex]
+            toolbar.isOffline = photo.isOffline
         }
     }
 }

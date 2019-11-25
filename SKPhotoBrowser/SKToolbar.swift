@@ -21,11 +21,19 @@ class SKToolbar: UIToolbar {
         }
     }
     
+    open var isOffline: Bool = false {
+        didSet {
+            self.offlineButtin?.isSelected = self.isOffline
+        }
+    }
+    
     var toolActionButton: UIBarButtonItem!
     
     fileprivate weak var browser: SKPhotoBrowser?
     
-    fileprivate weak var likeButton: SKLikeButton?
+    fileprivate weak var likeButton: SKSelectableButton?
+    
+    fileprivate weak var offlineButtin: SKSelectableButton?
     
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
@@ -69,19 +77,20 @@ private extension SKToolbar {
         self.toolActionButton = self.barBattonItem(imageName: "SKPhotoBrowser.bundle/images/btn_common_action_wh",
                                                    selector: #selector(actionButtonPressed))
         
-        let likeItem = self.getLikedBarButton(selector: #selector(likeButtonPressed(_:)))
+        let likeItem = self.getSkSelectButton(of: .like,
+                                              selector: #selector(likeButtonPressed(_:)))
         
-        let editItem = self.barBattonItem(imageName: "SKPhotoBrowser.bundle/images/btn_common_edit_wh",
-                                          selector: #selector(editButtonPressed(_:)))
+        let offlineItem = self.getSkSelectButton(of: .offline,
+                                                 selector: #selector(self.offlineButtonPressed(_:)))
         
         let deleteItem = self.barBattonItem(imageName: "SKPhotoBrowser.bundle/images/btn_common_delete_wh",
                                             selector: #selector(deleteButtonPressed(_:)))
         
         items.append(contentsOf: [toolActionButton,
                                   UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: self, action: nil),
-                                  likeItem,
+                                  UIBarButtonItem(customView: likeItem),
                                   UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: self, action: nil),
-                                  editItem,
+                                  UIBarButtonItem(customView: offlineItem),
                                   UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: self, action: nil),
                                   deleteItem])
         
@@ -89,9 +98,10 @@ private extension SKToolbar {
         
     }
     
-    @objc func editButtonPressed(_ sender: UIBarButtonItem) {
+    @objc func offlineButtonPressed(_ sender: SKOfflineButton) {
         guard let browser = self.browser else { return }
-        browser.delegate?.editPhoto?(browser, index: browser.currentPageIndex)
+        browser.delegate?.addItemToOffline?(browser, index: browser.currentPageIndex, sender: sender)
+        sender.switchState()
     }
     
     @objc func likeButtonPressed(_ sender: SKLikeButton) {
@@ -124,15 +134,21 @@ private extension SKToolbar {
         return UIBarButtonItem(customView: button)
     }
     
-    private func getLikedBarButton(selector: Selector) -> UIBarButtonItem {
-        let button = SKLikeButton(type: .custom)
-        button.isSelected = false
+    private func getSkSelectButton(of type: SKSelectableButtonType, selector: Selector) -> UIButton {
+        let button: SKSelectableButton
+        switch type {
+        case .like:
+            button = SKLikeButton()
+            self.likeButton = button
+        case .offline:
+            button = SKOfflineButton()
+            self.offlineButtin = button
+        }
         button.addTarget(self, action: selector, for: .touchUpInside)
         button.imageView?.contentMode = .scaleAspectFit
         button.frame = CGRect(x: 0, y: 0, width: 32, height: 32)
         button.tintColor = .white
-        self.likeButton = button
-        return UIBarButtonItem(customView: button)
+        return button
     }
 }
 

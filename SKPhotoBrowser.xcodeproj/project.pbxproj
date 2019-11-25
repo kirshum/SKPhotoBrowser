@@ -17,6 +17,9 @@
 		7643F4B41FE8CE7A00475F6E /* SKActionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7643F4B31FE8CE7A00475F6E /* SKActionView.swift */; };
 		7643F4B61FE9F42F00475F6E /* SKPaginationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7643F4B51FE9F42F00475F6E /* SKPaginationView.swift */; };
 		7643F4B91FEA4FCF00475F6E /* SKToolbar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7643F4B81FEA4FCF00475F6E /* SKToolbar.swift */; };
+		790FAB6F238BECCD00E2BD08 /* SKSelectableButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 790FAB6E238BECCD00E2BD08 /* SKSelectableButton.swift */; };
+		790FAB71238BED2C00E2BD08 /* SKLikeButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 790FAB70238BED2C00E2BD08 /* SKLikeButton.swift */; };
+		790FAB73238BED6300E2BD08 /* SKOfflineButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 790FAB72238BED6300E2BD08 /* SKOfflineButton.swift */; };
 		7922C33B22BA9A7500C01AD2 /* SKPhotoProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7922C33A22BA9A7400C01AD2 /* SKPhotoProtocol.swift */; };
 		7922C33D22BA9A8000C01AD2 /* SKPresentableViewType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7922C33C22BA9A8000C01AD2 /* SKPresentableViewType.swift */; };
 		7922C33F22BA9A8600C01AD2 /* SKVideoPlayerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7922C33E22BA9A8500C01AD2 /* SKVideoPlayerView.swift */; };
@@ -64,6 +67,9 @@
 		7643F4B31FE8CE7A00475F6E /* SKActionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SKActionView.swift; sourceTree = "<group>"; };
 		7643F4B51FE9F42F00475F6E /* SKPaginationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SKPaginationView.swift; sourceTree = "<group>"; };
 		7643F4B81FEA4FCF00475F6E /* SKToolbar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SKToolbar.swift; sourceTree = "<group>"; };
+		790FAB6E238BECCD00E2BD08 /* SKSelectableButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SKSelectableButton.swift; sourceTree = "<group>"; };
+		790FAB70238BED2C00E2BD08 /* SKLikeButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SKLikeButton.swift; sourceTree = "<group>"; };
+		790FAB72238BED6300E2BD08 /* SKOfflineButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SKOfflineButton.swift; sourceTree = "<group>"; };
 		7922C33A22BA9A7400C01AD2 /* SKPhotoProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SKPhotoProtocol.swift; sourceTree = "<group>"; };
 		7922C33C22BA9A8000C01AD2 /* SKPresentableViewType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SKPresentableViewType.swift; sourceTree = "<group>"; };
 		7922C33E22BA9A8500C01AD2 /* SKVideoPlayerView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SKVideoPlayerView.swift; sourceTree = "<group>"; };
@@ -125,6 +131,16 @@
 			path = SKPhotoBrowser;
 			sourceTree = "<group>";
 		};
+		790FAB6D238BECC200E2BD08 /* SKSelectableButton */ = {
+			isa = PBXGroup;
+			children = (
+				790FAB6E238BECCD00E2BD08 /* SKSelectableButton.swift */,
+				790FAB70238BED2C00E2BD08 /* SKLikeButton.swift */,
+				790FAB72238BED6300E2BD08 /* SKOfflineButton.swift */,
+			);
+			path = SKSelectableButton;
+			sourceTree = "<group>";
+		};
 		8909B5261BC791280060A053 = {
 			isa = PBXGroup;
 			children = (
@@ -149,6 +165,7 @@
 		8909B5321BC791280060A053 /* SKPhotoBrowser */ = {
 			isa = PBXGroup;
 			children = (
+				790FAB6D238BECC200E2BD08 /* SKSelectableButton */,
 				8909B5331BC791280060A053 /* SKPhotoBrowser.h */,
 				8909B5351BC791280060A053 /* Info.plist */,
 				7643F4B31FE8CE7A00475F6E /* SKActionView.swift */,
@@ -319,6 +336,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				790FAB71238BED2C00E2BD08 /* SKLikeButton.swift in Sources */,
 				26C97AD91D0EB8BB0039F6CB /* SKCacheable.swift in Sources */,
 				7643F4B91FEA4FCF00475F6E /* SKToolbar.swift in Sources */,
 				89C24A841D657AFE005F09A9 /* SKPagingScrollView.swift in Sources */,
@@ -330,6 +348,8 @@
 				8CA6C6521CBE76E80054D3C2 /* SKLocalPhoto.swift in Sources */,
 				7922C33B22BA9A7500C01AD2 /* SKPhotoProtocol.swift in Sources */,
 				89D0BA471D5994A8002A811B /* SKAnimator.swift in Sources */,
+				790FAB6F238BECCD00E2BD08 /* SKSelectableButton.swift in Sources */,
+				790FAB73238BED6300E2BD08 /* SKOfflineButton.swift in Sources */,
 				210E53ED1C986D3A008DD5E3 /* UIView+Radius.swift in Sources */,
 				7643F4B61FE9F42F00475F6E /* SKPaginationView.swift in Sources */,
 				7643F4B41FE8CE7A00475F6E /* SKActionView.swift in Sources */,
@@ -494,7 +514,7 @@
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				MARKETING_VERSION = 6.2.7;
+				MARKETING_VERSION = 6.2.8;
 				PRODUCT_BUNDLE_IDENTIFIER = com.keishi.suzuki.SKPhotoBrowser;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
@@ -517,7 +537,7 @@
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				MARKETING_VERSION = 6.2.7;
+				MARKETING_VERSION = 6.2.8;
 				PRODUCT_BUNDLE_IDENTIFIER = com.keishi.suzuki.SKPhotoBrowser;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;

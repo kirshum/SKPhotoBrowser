@@ -166,26 +166,3 @@ class SKDeleteButton: SKImageButton {
     }
 }
 
-public class SKLikeButton: UIButton {
-    
-    public override var isSelected: Bool {
-        didSet {
-            self.setupImage()
-        }
-    }
-    
-    public func switchLikeState() {
-        self.isSelected.toggle()
-    }
-    
-    func setupImage() {
-        self.backgroundColor = .clear
-        let image: UIImage
-        if self.isSelected {
-            image = UIImage(named: "SKPhotoBrowser.bundle/images/btn_common_heart_filled_wh", in: bundle, compatibleWith: nil) ?? UIImage()
-        } else {
-            image = UIImage(named: "SKPhotoBrowser.bundle/images/btn_common_heart_wh", in: bundle, compatibleWith: nil) ?? UIImage()
-        }
-        self.setImage(image, for: .normal)
-    }
-}

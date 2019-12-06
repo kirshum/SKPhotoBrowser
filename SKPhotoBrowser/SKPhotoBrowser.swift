@@ -285,7 +285,10 @@ public extension SKPhotoBrowser {
     }
     
     func updateOfflineButton() {
-        self.setupOfflineButton()
+        guard  let toolbar = self.toolbar else { return }
+        let currentIndex = min(currentPageIndex, self.photos.count - 1)
+        let photo = self.photos[currentIndex]
+        toolbar.isOffline = photo.isOffline
     }
 }
 
@@ -432,22 +435,11 @@ internal extension SKPhotoBrowser {
     }
     
     func setupToolBarButtoms() {
-        self.setupLikedButton()
-        self.setupOfflineButton()
-    }
-    
-    private func setupLikedButton() {
-        if let toolbar = self.toolbar {
-            let photo = self.photos[currentPageIndex]
-            toolbar.isLiked = photo.isLiked
-        }
-    }
-    
-    private func setupOfflineButton() {
-        if let toolbar = self.toolbar {
-            let photo = self.photos[currentPageIndex]
-            toolbar.isOffline = photo.isOffline
-        }
+        guard  let toolbar = self.toolbar else { return }
+        let currentIndex = min(currentPageIndex, self.photos.count - 1)
+        let photo = self.photos[currentIndex]
+        toolbar.isLiked = photo.isLiked
+        toolbar.isOffline = photo.isOffline
     }
 }
 

@@ -118,17 +118,13 @@ open class SKPhotoBrowser: UIViewController {
         configureToolbar()
 
         animator.willPresent(self)
-    }
-    
-    override open func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(true)
-        reloadData()
-        
-        var i = 0
-        for photo: SKPhotoProtocol in photos {
-            photo.index = i
-            i += 1
-        }
+         reloadData()
+         
+         var i = 0
+         for photo: SKPhotoProtocol in photos {
+             photo.index = i
+             i += 1
+         }
     }
     
     override open func viewWillLayoutSubviews() {
@@ -346,6 +342,10 @@ public extension SKPhotoBrowser {
         cancelControlHiding()
         // start
         controlVisibilityTimer = Timer.scheduledTimer(timeInterval: 4.0, target: self, selector: #selector(SKPhotoBrowser.hideControls(_:)), userInfo: nil, repeats: false)
+    }
+    
+    func showControls() {
+        setControlsHidden(false, animated: true, permanent: false)
     }
     
     func hideControls() {

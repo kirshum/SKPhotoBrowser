@@ -17,6 +17,8 @@ class SKVideoPlayerView: UIView, PresentableViewType {
     
     var captionView: SKCaptionView!
     
+    var previewImageView: UIImageView = UIImageView()
+    
     var photo: SKPhotoProtocol! {
         didSet {
             if photo != nil && photo.underlyingImage != nil {
@@ -45,12 +47,9 @@ class SKVideoPlayerView: UIView, PresentableViewType {
             self.setObservation(in: self.playerController.player!)
             self.playerController.view.frame = self.bounds
             self.playerController.player?.allowsExternalPlayback = true
-            self.playerController.showsPlaybackControls = false
         }
     }
 
-    private var playButtonImageView: SKDetectingView!
-    
     var contentOffset: CGPoint {
         return .zero
     }
@@ -64,6 +63,9 @@ class SKVideoPlayerView: UIView, PresentableViewType {
     private var indicatorView: SKIndicatorView!
     
     private var playerController = AVPlayerViewController()
+    
+    private var playButton: UIButton!
+    
     
     // MARK: -
     
@@ -87,9 +89,8 @@ class SKVideoPlayerView: UIView, PresentableViewType {
         self.playerController.player?.removeObserver(self, forKeyPath: #keyPath(AVPlayer.rate))
         self.playerController.player?.pause()
         self.playerController.player = nil
-        self.playerController.showsPlaybackControls = false
-        if self.playButtonImageView.isHidden {
-            self.playButtonImageView.isHidden = false
+        if self.playButton.isHidden {
+            self.playButton.isHidden = false
         }
     }
     
@@ -119,27 +120,26 @@ class SKVideoPlayerView: UIView, PresentableViewType {
     
     open override func layoutSubviews() {
         self.indicatorView.frame = bounds
-        
         super.layoutSubviews()
-        
-        guard self.playButtonImageView != nil else {
-            return
-        }
-        
-        self.playButtonImageView.frame = self.bounds
-        self.playButtonImageView.subviews.forEach {
-            $0.center = self.playButtonImageView.center
-        }
     }
     
-    // MARK: - Private
     
+    // MARK: - Private
+
     private func setObservation(in player: AVPlayer) {
         player.addObserver(self, forKeyPath: #keyPath(AVPlayer.rate), options: [.new], context: nil)
         self.unsubscribeFromPlayToEndNotification()
         
         NotificationCenter.default.addObserver(self, selector: #selector(playerItemDidPlayToEndTime), name: NSNotification.Name.AVPlayerItemDidPlayToEndTime, object: nil)
         
+        player.currentItem?.addObserver(self,
+                                        forKeyPath: #keyPath(AVPlayerItem.status),
+                                        options: [.old, .new],
+                                        context: nil)
+        
+        self.playerController.addObserver(self, forKeyPath: #keyPath(AVPlayerViewController.isReadyForDisplay),
+                                          options: [.old, .new],
+                                          context: nil)
     }
     
     private func unsubscribeFromPlayToEndNotification() {
@@ -148,49 +148,71 @@ class SKVideoPlayerView: UIView, PresentableViewType {
     
     @objc private func playerItemDidPlayToEndTime() {
         self.playerController.player?.seek(to: CMTime(seconds: 0, preferredTimescale: 1))
+        self.playButton.isHidden = false
+        self.browser?.showControls()
     }
     
     override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
         if keyPath == #keyPath(AVPlayer.rate) {
             if self.playerController.player?.rate == 0 {
-                if self.browser?.areControlsHidden() ?? false {
-                    self.browser?.toggleControls()
-                }
-                self.playerController.showsPlaybackControls = false
-                self.playButtonImageView.isHidden = false
+                self.playButton.isHidden = false
             } else {
                 self.browser?.hideControls()
-                self.playerController.showsPlaybackControls = true
-                self.playButtonImageView.isHidden = true
+                self.playButton.isHidden = true
+            }
+        } else if keyPath == #keyPath(AVPlayerViewController.isReadyForDisplay) {
+            if self.playerController.isReadyForDisplay {
+                self.updatePreview()
             }
         }
     }
     
     fileprivate func setupImageView() {
-        // image
-        self.playButtonImageView = SKDetectingView(frame: frame)
-        self.playButtonImageView.delegate = self
-        self.playButtonImageView.contentMode = .bottom
-        self.playButtonImageView.backgroundColor = .clear
-        addSubview(self.playButtonImageView)
+        self.addSubview(previewImageView)
+        self.previewImageView.contentMode = .scaleAspectFit
+        self.previewImageView.translatesAutoresizingMaskIntoConstraints = false
+        self.previewImageView.leadingAnchor.constraint(equalTo: self.leadingAnchor).isActive = true
+        self.previewImageView.trailingAnchor.constraint(equalTo: self.trailingAnchor).isActive = true
+        self.previewImageView.topAnchor.constraint(equalTo: self.topAnchor).isActive = true
+        self.previewImageView.bottomAnchor.constraint(equalTo: self.bottomAnchor).isActive = true
         
+        let singleTap = UITapGestureRecognizer(target: self,
+                                               action: #selector(self.handleSingleTap))
         let bundle = Bundle(for: SKPhotoBrowser.self)
-        let image = UIImage(named: "SKPhotoBrowser.bundle/images/ic_PlayVideo", in: bundle, compatibleWith: nil)
-        let imgView = UIImageView(image: image)
-        imgView.center = playButtonImageView.center
-        self.playButtonImageView.addSubview(imgView)
+        let image = UIImage(named: "SKPhotoBrowser.bundle/images/ic_PlayVideo",
+                            in: bundle, compatibleWith: nil)
+
+        self.playButton = UIButton(frame:
+            CGRect(x: 0,
+                   y: 0,
+                   width: Consants.playButtonWidth,
+                   height: Consants.playButonHeight))
         
-        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(hideAndPlay))
-        imgView.addGestureRecognizer(tapGesture)
+        self.playButton.setImage(image, for: .normal)
+        self.playButton.addTarget(self,
+                                  action: #selector(self.hideAndPlay),
+                                  for: .touchUpInside)
+        self.addSubview(self.playButton)
+        self.playButton.translatesAutoresizingMaskIntoConstraints = false
+        self.playButton.centerXAnchor.constraint(equalTo: self.centerXAnchor).isActive = true
+        self.playButton.centerYAnchor.constraint(equalTo: self.centerYAnchor).isActive = true
+        self.playButton.widthAnchor.constraint(equalToConstant: Consants.playButtonWidth).isActive = true
+        self.playButton.heightAnchor.constraint(equalToConstant: Consants.playButonHeight).isActive = true
+        self.bringSubviewToFront(self.playButton)
+        self.addGestureRecognizer(singleTap)
+    }
+    
+    @objc private func handleSingleTap() {
+        self.playButton.isHidden = false
+        self.browser?.showControls()
     }
     
     private func setup() {
-        
-        self.addSubview(playerController.view)
-        self.playerController.showsPlaybackControls = false
-        
+        self.playerController.videoGravity = .resizeAspect
+        if #available(iOS 11.0, *) {
+            self.playerController.exitsFullScreenWhenPlaybackEnds = true
+        }
         self.setupImageView()
-        // indicator
         self.indicatorView = SKIndicatorView(frame: frame)
         addSubview(self.indicatorView)
     }
@@ -213,29 +235,44 @@ class SKVideoPlayerView: UIView, PresentableViewType {
     }
     
     @objc private func hideAndPlay() {
-        self.playButtonImageView.isHidden = true
-        self.playerController.showsPlaybackControls = true
-        self.playVideo()
-        self.hideControlls()
-    }
-}
-
-extension SKVideoPlayerView: SKDetectingViewDelegate {
-    
-    func handleSingleTap(_ view: UIView, touch: UITouch) {
-        self.toggleControlls()
-    }
-    
-    func handleDoubleTap(_ view: UIView, touch: UITouch) {
-        self.toggleControlls()
-    }
-    
-    private func toggleControlls() {
-        self.browser?.toggleControls()
-    }
-    
-    private func hideControlls() {
+        self.playButton.isHidden = true
         self.browser?.hideControls()
+        self.browser?.present(self.playerController, animated: true, completion:{ [weak self]  in
+            self?.playVideo()
+        })
+    }
+    
+    private func createPreview() -> UIImage? {
+        guard let player = self.playerController.player
+            , let asset = player.currentItem?.asset
+            else { return nil }
+        
+        let currentTime: CMTime = player.currentTime()
+        let currentTimeInSecs: Float64 = CMTimeGetSeconds(currentTime)
+        let actionTime: CMTime = CMTimeMake(value: Int64(currentTimeInSecs), timescale: 1)
+        
+        
+        let imageGenerator = AVAssetImageGenerator(asset: asset)
+        imageGenerator.appliesPreferredTrackTransform = true
+        
+        guard let imageRef =  try? imageGenerator.copyCGImage(at: actionTime, actualTime: nil)
+            else { return nil }
+        return  UIImage(cgImage: imageRef)
+        
+    }
+    
+    private func updatePreview() {
+        guard let preivew = self.createPreview() else { return }
+        self.previewImageView.image = preivew
     }
 }
 
+
+// MARK: - Constants
+
+private extension SKVideoPlayerView {
+    struct Consants {
+        static let playButtonWidth: CGFloat = 44
+        static let playButonHeight: CGFloat = 44
+    }
+}

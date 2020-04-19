@@ -22,10 +22,10 @@
 		790FAB73238BED6300E2BD08 /* SKOfflineButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 790FAB72238BED6300E2BD08 /* SKOfflineButton.swift */; };
 		7922C33B22BA9A7500C01AD2 /* SKPhotoProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7922C33A22BA9A7400C01AD2 /* SKPhotoProtocol.swift */; };
 		7922C33D22BA9A8000C01AD2 /* SKPresentableViewType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7922C33C22BA9A8000C01AD2 /* SKPresentableViewType.swift */; };
-		7922C33F22BA9A8600C01AD2 /* SKVideoPlayerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7922C33E22BA9A8500C01AD2 /* SKVideoPlayerView.swift */; };
-		7922C34122BA9AAA00C01AD2 /* SKVideoPlayerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7922C34022BA9AAA00C01AD2 /* SKVideoPlayerView.swift */; };
 		7922C34322BA9AB300C01AD2 /* SKPresentableViewType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7922C34222BA9AB300C01AD2 /* SKPresentableViewType.swift */; };
 		7922C34522BA9ABD00C01AD2 /* SKPhotoProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7922C34422BA9ABD00C01AD2 /* SKPhotoProtocol.swift */; };
+		797A9EBA244DBB3500650AE5 /* PlayerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 797A9EB9244DBB3500650AE5 /* PlayerView.swift */; };
+		797D56C82448ADB8002BEC61 /* VideoPlaybackControlsView.swift in Resources */ = {isa = PBXBuildFile; fileRef = FF8F3A9724488E5E00AA5096 /* VideoPlaybackControlsView.swift */; };
 		8909B5341BC791280060A053 /* SKPhotoBrowser.h in Headers */ = {isa = PBXBuildFile; fileRef = 8909B5331BC791280060A053 /* SKPhotoBrowser.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		8909B5431BC791510060A053 /* SKCaptionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8909B53B1BC791510060A053 /* SKCaptionView.swift */; };
 		8909B5441BC791510060A053 /* SKDetectingImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8909B53C1BC791510060A053 /* SKDetectingImageView.swift */; };
@@ -44,6 +44,10 @@
 		A64B89361CB04222000071B9 /* SKPhotoBrowserTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A64B89351CB04222000071B9 /* SKPhotoBrowserTests.swift */; };
 		A64B89381CB04222000071B9 /* SKPhotoBrowser.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8909B5301BC791280060A053 /* SKPhotoBrowser.framework */; };
 		D2265CCF1F799C75009256CC /* UIApplication+UIWindow.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2265CCE1F799C75009256CC /* UIApplication+UIWindow.swift */; };
+		FF8F3A9424488E4400AA5096 /* UIView+Nib.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF8F3A9324488E4400AA5096 /* UIView+Nib.swift */; };
+		FF8F3A9924488E5E00AA5096 /* VideoPlaybackControlsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF8F3A9724488E5E00AA5096 /* VideoPlaybackControlsView.swift */; };
+		FF8F3A9A24488E5E00AA5096 /* VideoPlaybackControlsView.xib in Resources */ = {isa = PBXBuildFile; fileRef = FF8F3A9824488E5E00AA5096 /* VideoPlaybackControlsView.xib */; };
+		FF8F3A9F24488F4D00AA5096 /* VideoPlayerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF8F3A9E24488F4D00AA5096 /* VideoPlayerView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -72,10 +76,9 @@
 		790FAB72238BED6300E2BD08 /* SKOfflineButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SKOfflineButton.swift; sourceTree = "<group>"; };
 		7922C33A22BA9A7400C01AD2 /* SKPhotoProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SKPhotoProtocol.swift; sourceTree = "<group>"; };
 		7922C33C22BA9A8000C01AD2 /* SKPresentableViewType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SKPresentableViewType.swift; sourceTree = "<group>"; };
-		7922C33E22BA9A8500C01AD2 /* SKVideoPlayerView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SKVideoPlayerView.swift; sourceTree = "<group>"; };
-		7922C34022BA9AAA00C01AD2 /* SKVideoPlayerView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SKVideoPlayerView.swift; sourceTree = "<group>"; };
 		7922C34222BA9AB300C01AD2 /* SKPresentableViewType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SKPresentableViewType.swift; sourceTree = "<group>"; };
 		7922C34422BA9ABD00C01AD2 /* SKPhotoProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SKPhotoProtocol.swift; sourceTree = "<group>"; };
+		797A9EB9244DBB3500650AE5 /* PlayerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerView.swift; sourceTree = "<group>"; };
 		8909B5301BC791280060A053 /* SKPhotoBrowser.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = SKPhotoBrowser.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		8909B5331BC791280060A053 /* SKPhotoBrowser.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SKPhotoBrowser.h; sourceTree = "<group>"; };
 		8909B5351BC791280060A053 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -98,6 +101,10 @@
 		A64B89351CB04222000071B9 /* SKPhotoBrowserTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SKPhotoBrowserTests.swift; sourceTree = "<group>"; };
 		A64B89371CB04222000071B9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		D2265CCE1F799C75009256CC /* UIApplication+UIWindow.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIApplication+UIWindow.swift"; sourceTree = "<group>"; };
+		FF8F3A9324488E4400AA5096 /* UIView+Nib.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIView+Nib.swift"; sourceTree = "<group>"; };
+		FF8F3A9724488E5E00AA5096 /* VideoPlaybackControlsView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VideoPlaybackControlsView.swift; sourceTree = "<group>"; };
+		FF8F3A9824488E5E00AA5096 /* VideoPlaybackControlsView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = VideoPlaybackControlsView.xib; sourceTree = "<group>"; };
+		FF8F3A9E24488F4D00AA5096 /* VideoPlayerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoPlayerView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -122,6 +129,7 @@
 		210E53EB1C986D1C008DD5E3 /* extensions */ = {
 			isa = PBXGroup;
 			children = (
+				FF8F3A9324488E4400AA5096 /* UIView+Nib.swift */,
 				0D21DAF222AA3FC3009EBA09 /* Array+SKPhotoBrowser.swift */,
 				210E53EC1C986D3A008DD5E3 /* UIView+Radius.swift */,
 				210E53EE1C986D57008DD5E3 /* UIImage+Rotation.swift */,
@@ -165,6 +173,7 @@
 		8909B5321BC791280060A053 /* SKPhotoBrowser */ = {
 			isa = PBXGroup;
 			children = (
+				FF8F3A9B24488E6300AA5096 /* VideoPlayer */,
 				790FAB6D238BECC200E2BD08 /* SKSelectableButton */,
 				8909B5331BC791280060A053 /* SKPhotoBrowser.h */,
 				8909B5351BC791280060A053 /* Info.plist */,
@@ -187,9 +196,7 @@
 				89C24A811D657AD1005F09A9 /* SKPhotoBrowserOptions.swift */,
 				7922C34422BA9ABD00C01AD2 /* SKPhotoProtocol.swift */,
 				7922C34222BA9AB300C01AD2 /* SKPresentableViewType.swift */,
-				7922C34022BA9AAA00C01AD2 /* SKVideoPlayerView.swift */,
 				7922C33C22BA9A8000C01AD2 /* SKPresentableViewType.swift */,
-				7922C33E22BA9A8500C01AD2 /* SKVideoPlayerView.swift */,
 				7922C33A22BA9A7400C01AD2 /* SKPhotoProtocol.swift */,
 				7643F4B81FEA4FCF00475F6E /* SKToolbar.swift */,
 				8909B5421BC791510060A053 /* SKZoomingScrollView.swift */,
@@ -205,6 +212,25 @@
 				A64B89371CB04222000071B9 /* Info.plist */,
 			);
 			path = SKPhotoBrowserTests;
+			sourceTree = "<group>";
+		};
+		FF8F3A9624488E5E00AA5096 /* VideoPlaybackControlsView */ = {
+			isa = PBXGroup;
+			children = (
+				FF8F3A9724488E5E00AA5096 /* VideoPlaybackControlsView.swift */,
+				FF8F3A9824488E5E00AA5096 /* VideoPlaybackControlsView.xib */,
+			);
+			path = VideoPlaybackControlsView;
+			sourceTree = "<group>";
+		};
+		FF8F3A9B24488E6300AA5096 /* VideoPlayer */ = {
+			isa = PBXGroup;
+			children = (
+				FF8F3A9624488E5E00AA5096 /* VideoPlaybackControlsView */,
+				FF8F3A9E24488F4D00AA5096 /* VideoPlayerView.swift */,
+				797A9EB9244DBB3500650AE5 /* PlayerView.swift */,
+			);
+			path = VideoPlayer;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -302,7 +328,9 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				797D56C82448ADB8002BEC61 /* VideoPlaybackControlsView.swift in Resources */,
 				0D3F5EDC22AA509600F4D74F /* SKPhotoBrowser.bundle in Resources */,
+				FF8F3A9A24488E5E00AA5096 /* VideoPlaybackControlsView.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -341,7 +369,6 @@
 				7643F4B91FEA4FCF00475F6E /* SKToolbar.swift in Sources */,
 				89C24A841D657AFE005F09A9 /* SKPagingScrollView.swift in Sources */,
 				7922C34522BA9ABD00C01AD2 /* SKPhotoProtocol.swift in Sources */,
-				7922C33F22BA9A8600C01AD2 /* SKVideoPlayerView.swift in Sources */,
 				8909B5441BC791510060A053 /* SKDetectingImageView.swift in Sources */,
 				7922C34322BA9AB300C01AD2 /* SKPresentableViewType.swift in Sources */,
 				8909B54A1BC791510060A053 /* SKZoomingScrollView.swift in Sources */,
@@ -358,16 +385,19 @@
 				89D0BA491D59966B002A811B /* SKMesurement.swift in Sources */,
 				8909B5471BC791510060A053 /* SKPhoto.swift in Sources */,
 				8909B5461BC791510060A053 /* SKIndicatorView.swift in Sources */,
+				797A9EBA244DBB3500650AE5 /* PlayerView.swift in Sources */,
 				7922C33D22BA9A8000C01AD2 /* SKPresentableViewType.swift in Sources */,
+				FF8F3A9F24488F4D00AA5096 /* VideoPlayerView.swift in Sources */,
 				8917B1B41D5A14B0000CE1C4 /* SKButtons.swift in Sources */,
 				89C24A821D657AD1005F09A9 /* SKPhotoBrowserOptions.swift in Sources */,
 				26C97AD51D0EB6870039F6CB /* SKCache.swift in Sources */,
 				210E53EF1C986D57008DD5E3 /* UIImage+Rotation.swift in Sources */,
 				8909B5431BC791510060A053 /* SKCaptionView.swift in Sources */,
 				8909B5491BC791510060A053 /* SKPhotoBrowser.swift in Sources */,
+				FF8F3A9424488E4400AA5096 /* UIView+Nib.swift in Sources */,
 				8909B5451BC791510060A053 /* SKDetectingView.swift in Sources */,
+				FF8F3A9924488E5E00AA5096 /* VideoPlaybackControlsView.swift in Sources */,
 				0D21DAF322AA3FC3009EBA09 /* Array+SKPhotoBrowser.swift in Sources */,
-				7922C34122BA9AAA00C01AD2 /* SKVideoPlayerView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

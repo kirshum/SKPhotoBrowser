@@ -24,6 +24,8 @@ open class SKPhotoBrowser: UIViewController {
     
     internal lazy var pagingScrollView: SKPagingScrollView = SKPagingScrollView(frame: self.view.frame, browser: self)
     
+    var playbackControlsView: VideoPlaybackControlsView? = LoadFromNib(viewOfClass: VideoPlaybackControlsView.self)
+    
     // appearance
     fileprivate let bgColor: UIColor = SKPhotoBrowserOptions.backgroundColor
     // animation
@@ -118,13 +120,17 @@ open class SKPhotoBrowser: UIViewController {
         configureToolbar()
 
         animator.willPresent(self)
-         reloadData()
-         
-         var i = 0
-         for photo: SKPhotoProtocol in photos {
-             photo.index = i
-             i += 1
-         }
+    }
+    
+    override open func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(true)
+        reloadData()
+        
+        var i = 0
+        for photo: SKPhotoProtocol in photos {
+            photo.index = i
+            i += 1
+        }
     }
     
     override open func viewWillLayoutSubviews() {
@@ -521,6 +527,20 @@ internal extension SKPhotoBrowser {
             dismissPhotoBrowser(animated: true)
         }
     }
+    
+    func hidePlaybackControls() {
+        UIView.animate(withDuration: Constants.animationTime) {
+             self.playbackControlsView?.alpha = 0
+        }
+    }
+    
+    func showPlaybackControls() {
+        guard let playbackControlsView = self.playbackControlsView else { return }
+        self.view.bringSubviewToFront(playbackControlsView)
+        UIView.animate(withDuration: Constants.animationTime) {
+            playbackControlsView.alpha = 1
+        }
+    }
 }
 
 // MARK: - Private Function
@@ -538,6 +558,8 @@ private extension SKPhotoBrowser {
     func configurePagingScrollView() {
         pagingScrollView.delegate = self
         view.addSubview(pagingScrollView)
+        /// FIXME: Если по нормальному засовывать вьюху в SkVideoPlayerView, абсолютно непонятно по-какой причине  ломается  пагинция у скролл вью.
+        self.addVideoPlaybackControls()
     }
 
     func configureGestureControl() {
@@ -578,7 +600,10 @@ private extension SKPhotoBrowser {
         
         // scroll animation
         pagingScrollView.setControlsHidden(hidden: hidden)
-
+        
+        // 
+        self.hidePlaybackControls()
+        
         // paging animation
         paginationView.setControlsHidden(hidden: hidden)
         
@@ -592,11 +617,43 @@ private extension SKPhotoBrowser {
         }
         setNeedsStatusBarAppearanceUpdate()
     }
+    
+    func addVideoPlaybackControls() {
+        guard let playbackControlsView = self.playbackControlsView else { return }
+        self.playbackControlsView?.translatesAutoresizingMaskIntoConstraints = true
+        self.playbackControlsView?.frame = self.calculateFrameForPlayback()
+        self.hidePlaybackControls()
+        self.view.addSubview(playbackControlsView)
+    }
+    
+    func calculateFrameForPlayback() -> CGRect {
+        let frameWidth = self.view.bounds.width
+        let playbacksWidth = frameWidth > Constants.playbackConstrolsOtherDevicesWidth
+            ? Constants.playbackConstrolsOtherDevicesWidth
+            : Constants.playbackConstrolsForSeWidth
+        
+        let freeSpace: CGFloat = frameWidth - playbacksWidth
+        let minY = self.view.bounds.maxY
+            - Constants.playbackControlsViewBottomConstant
+            - (UIApplication.shared.keyWindow?.safeAreaInsets.bottom ?? 0)
+            - Constants.playbackControlsViewHeightConstant
+        
+        return CGRect(x: self.view.bounds.minX + (freeSpace / 2),
+                      y: minY,
+                      width: playbacksWidth,
+                      height: Constants.playbackControlsViewHeightConstant)
+    }
 }
 
 // MARK: - UIScrollView Delegate
 
 extension SKPhotoBrowser: UIScrollViewDelegate {
+    
+    public func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
+        self.hidePlaybackControls()
+        self.playbackControlsView?.isHidden = true
+    }
+    
     public func scrollViewDidScroll(_ scrollView: UIScrollView) {
         guard isViewActive else { return }
         guard !isPerformingLayout else { return }
@@ -618,11 +675,31 @@ extension SKPhotoBrowser: UIScrollViewDelegate {
     public func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
         hideControlsAfterDelay()
         
-        let currentIndex = pagingScrollView.contentOffset.x / pagingScrollView.frame.size.width
-        delegate?.didScrollToIndex?(self, index: Int(currentIndex))
+        let currentIndex = Int(pagingScrollView.contentOffset.x / pagingScrollView.frame.size.width)
+        self.pagingScrollView.updateContentOffset(currentIndex)
+        
+        let isVideo = pagingScrollView.isVideo(at: currentIndex)
+        self.playbackControlsView?.isHidden = !isVideo
+        isVideo
+            ? self.showPlaybackControls()
+            : self.hidePlaybackControls()
+        
+       
+        delegate?.didScrollToIndex?(self, index: currentIndex)
     }
     
     public func scrollViewDidEndScrollingAnimation(_ scrollView: UIScrollView) {
         isEndAnimationByToolBar = true
+    }
+}
+
+private extension SKPhotoBrowser {
+    struct Constants {
+        static let animationTime: Double = 0.35
+        static let iphoneSeScreenWidth = 320
+        static let playbackConstrolsForSeWidth: CGFloat = 280
+        static let playbackConstrolsOtherDevicesWidth: CGFloat = 320
+        static let playbackControlsViewBottomConstant: CGFloat = -70
+        static let playbackControlsViewHeightConstant: CGFloat = 80
     }
 }

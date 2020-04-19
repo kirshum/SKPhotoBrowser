@@ -38,6 +38,11 @@ class SKPagingScrollView: UIScrollView {
         updateFrame(bounds, currentPageIndex: browser.currentPageIndex)
     }
     
+    func isVideo(at index: Int) -> Bool {
+        guard let page = self.pageDisplayedAtIndex(index) else { return false }
+        return page is SKVideoPlayerView
+    }
+    
     func reload() {
         visiblePages.forEach({$0.removeFromSuperview()})
         visiblePages.removeAll()
@@ -170,7 +175,7 @@ class SKPagingScrollView: UIScrollView {
                 // ref val for control
                 page.captionView = captionView
             }
-        }
+        }  
     }
     
     func frameForCaptionView(_ captionView: SKCaptionView, index: Int) -> CGRect {

@@ -24,7 +24,7 @@ public struct SKPhotoBrowserOptions {
 
     public static var displayHorizontalScrollIndicator: Bool = true
     public static var displayVerticalScrollIndicator: Bool = true
-    public static var displayPagingHorizontalScrollIndicator: Bool = true
+    public static var displayPagingHorizontalScrollIndicator: Bool = false
     
     public static var bounceAnimation: Bool = false
     public static var enableZoomBlackArea: Bool = true

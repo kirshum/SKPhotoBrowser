@@ -44,20 +44,29 @@ open class SKLocalPhoto: NSObject, SKPhotoProtocol {
     
     open func loadUnderlyingImageAndNotify() {
         
-        if underlyingImage != nil && photoURL == nil {
-            loadUnderlyingImageComplete()
-        }
-        guard photoURL != nil
-            , FileManager.default.fileExists(atPath: photoURL) else {
+        guard self.underlyingImage != nil
+            , let pathToPhoto = self.photoURL else {
+                self.loadUnderlyingImageComplete()
                 return
         }
+        
+        guard FileManager.default.fileExists(atPath: pathToPhoto) else {
+            return
+        }
+        
         if self.type == .image
-            , let data = FileManager.default.contents(atPath: photoURL) {
-            self.loadUnderlyingImageComplete()
+            , let data = FileManager.default.contents(atPath: pathToPhoto) {
+            let url = URL(fileURLWithPath: pathToPhoto)
+            if FileIsGIF(at: url)
+                , let gifImage = UIImage.gif(at: pathToPhoto) {
+                self.underlyingImage = gifImage
+                self.loadUnderlyingImageComplete()
+                return
+            }
             if let image = UIImage(data: data) {
                 self.underlyingImage = image
-                self.loadUnderlyingImageComplete()
             }
+            self.loadUnderlyingImageComplete()
         }
     }
     

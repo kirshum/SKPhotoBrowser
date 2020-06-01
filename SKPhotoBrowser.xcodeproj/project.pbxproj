@@ -43,6 +43,8 @@
 		8CA6C6521CBE76E80054D3C2 /* SKLocalPhoto.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CA6C6511CBE76E80054D3C2 /* SKLocalPhoto.swift */; };
 		A64B89361CB04222000071B9 /* SKPhotoBrowserTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A64B89351CB04222000071B9 /* SKPhotoBrowserTests.swift */; };
 		A64B89381CB04222000071B9 /* SKPhotoBrowser.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8909B5301BC791280060A053 /* SKPhotoBrowser.framework */; };
+		A96EA10A248518BF008CA020 /* GIFFunctions.swift in Sources */ = {isa = PBXBuildFile; fileRef = A96EA109248518BF008CA020 /* GIFFunctions.swift */; };
+		A96EA10C248518E0008CA020 /* UIImage+GIF.swift in Sources */ = {isa = PBXBuildFile; fileRef = A96EA10B248518E0008CA020 /* UIImage+GIF.swift */; };
 		D2265CCF1F799C75009256CC /* UIApplication+UIWindow.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2265CCE1F799C75009256CC /* UIApplication+UIWindow.swift */; };
 		FF8F3A9424488E4400AA5096 /* UIView+Nib.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF8F3A9324488E4400AA5096 /* UIView+Nib.swift */; };
 		FF8F3A9924488E5E00AA5096 /* VideoPlaybackControlsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF8F3A9724488E5E00AA5096 /* VideoPlaybackControlsView.swift */; };
@@ -100,6 +102,8 @@
 		A64B89331CB04222000071B9 /* SKPhotoBrowserTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SKPhotoBrowserTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		A64B89351CB04222000071B9 /* SKPhotoBrowserTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SKPhotoBrowserTests.swift; sourceTree = "<group>"; };
 		A64B89371CB04222000071B9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		A96EA109248518BF008CA020 /* GIFFunctions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GIFFunctions.swift; sourceTree = "<group>"; };
+		A96EA10B248518E0008CA020 /* UIImage+GIF.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+GIF.swift"; sourceTree = "<group>"; };
 		D2265CCE1F799C75009256CC /* UIApplication+UIWindow.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIApplication+UIWindow.swift"; sourceTree = "<group>"; };
 		FF8F3A9324488E4400AA5096 /* UIView+Nib.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIView+Nib.swift"; sourceTree = "<group>"; };
 		FF8F3A9724488E5E00AA5096 /* VideoPlaybackControlsView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VideoPlaybackControlsView.swift; sourceTree = "<group>"; };
@@ -134,6 +138,8 @@
 				210E53EC1C986D3A008DD5E3 /* UIView+Radius.swift */,
 				210E53EE1C986D57008DD5E3 /* UIImage+Rotation.swift */,
 				D2265CCE1F799C75009256CC /* UIApplication+UIWindow.swift */,
+				A96EA109248518BF008CA020 /* GIFFunctions.swift */,
+				A96EA10B248518E0008CA020 /* UIImage+GIF.swift */,
 			);
 			name = extensions;
 			path = SKPhotoBrowser;
@@ -367,12 +373,14 @@
 				790FAB71238BED2C00E2BD08 /* SKLikeButton.swift in Sources */,
 				26C97AD91D0EB8BB0039F6CB /* SKCacheable.swift in Sources */,
 				7643F4B91FEA4FCF00475F6E /* SKToolbar.swift in Sources */,
+				A96EA10A248518BF008CA020 /* GIFFunctions.swift in Sources */,
 				89C24A841D657AFE005F09A9 /* SKPagingScrollView.swift in Sources */,
 				7922C34522BA9ABD00C01AD2 /* SKPhotoProtocol.swift in Sources */,
 				8909B5441BC791510060A053 /* SKDetectingImageView.swift in Sources */,
 				7922C34322BA9AB300C01AD2 /* SKPresentableViewType.swift in Sources */,
 				8909B54A1BC791510060A053 /* SKZoomingScrollView.swift in Sources */,
 				8CA6C6521CBE76E80054D3C2 /* SKLocalPhoto.swift in Sources */,
+				A96EA10C248518E0008CA020 /* UIImage+GIF.swift in Sources */,
 				7922C33B22BA9A7500C01AD2 /* SKPhotoProtocol.swift in Sources */,
 				89D0BA471D5994A8002A811B /* SKAnimator.swift in Sources */,
 				790FAB6F238BECCD00E2BD08 /* SKSelectableButton.swift in Sources */,
@@ -544,7 +552,7 @@
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				MARKETING_VERSION = 6.3.1;
+				MARKETING_VERSION = 6.3.2;
 				PRODUCT_BUNDLE_IDENTIFIER = com.keishi.suzuki.SKPhotoBrowser;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
@@ -567,7 +575,7 @@
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				MARKETING_VERSION = 6.3.1;
+				MARKETING_VERSION = 6.3.2;
 				PRODUCT_BUNDLE_IDENTIFIER = com.keishi.suzuki.SKPhotoBrowser;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;

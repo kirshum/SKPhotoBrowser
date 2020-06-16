@@ -101,7 +101,6 @@ private extension SKToolbar {
     @objc func offlineButtonPressed(_ sender: SKOfflineButton) {
         guard let browser = self.browser else { return }
         browser.delegate?.addItemToOffline?(browser, index: browser.currentPageIndex, sender: sender)
-        sender.switchState()
     }
     
     @objc func likeButtonPressed(_ sender: SKLikeButton) {

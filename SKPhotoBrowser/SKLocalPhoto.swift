@@ -44,13 +44,13 @@ open class SKLocalPhoto: NSObject, SKPhotoProtocol {
     
     open func loadUnderlyingImageAndNotify() {
         
-        guard self.underlyingImage != nil
-            , let pathToPhoto = self.photoURL else {
-                self.loadUnderlyingImageComplete()
-                return
+        guard self.underlyingImage == nil || self.photoURL != nil else {
+            self.loadUnderlyingImageComplete()
+            return
         }
         
-        guard FileManager.default.fileExists(atPath: pathToPhoto) else {
+        guard let pathToPhoto = self.photoURL
+            , FileManager.default.fileExists(atPath: pathToPhoto) else {
             return
         }
         
